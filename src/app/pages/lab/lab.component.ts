@@ -9,4 +9,15 @@ import { Component } from '@angular/core';
 })
 export class LabComponent {
 
+  aplicacion = "Mi laboratorio de pruebas";
+
+  listaComida = [
+    "Frutas",
+    "Verduras",
+    "Carne"
+  ];
+
+  desabilitado = false;
+
+
 }

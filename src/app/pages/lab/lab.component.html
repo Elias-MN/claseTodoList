@@ -1,1 +1,13 @@
-<p>lab works!</p>
+<h1>String Interpolation</h1>
+
+<h4>{{ aplicacion }}</h4>
+
+<ul>
+  @for (comida of listaComida; track $index) {
+  <li>Comprar: {{ comida }}</li>
+  }
+</ul>
+<hr />
+
+<h1>Property binding</h1>
+<input type="button" value="Enviar" [disabled]="desabilitado">
