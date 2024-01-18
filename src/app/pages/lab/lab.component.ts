@@ -1,4 +1,5 @@
 import { Component, signal } from '@angular/core';
+import { Tarea } from '../../model/tarea.model';
 
 @Component({
   selector: 'app-lab',
@@ -52,5 +53,38 @@ export class LabComponent {
   }
 
   // Crear un input color, cuyo color seleccionado, se muestre en pantalla.
+  color = signal("Sin seleccionar");
+  CambiarColor(event: Event) {
+    let input = event.target as HTMLInputElement;
+    this.color.set(input.value);
+  }
+
+  listadoSignal = signal([
+    "Aprender js",
+    "Aprender Angular",
+    "Desarrollar una app"
+  ]);
+
+  listadoTareas = signal<Tarea[]>([
+    {
+      id: 0,
+      nombre: "Aprender js",
+      completada: false
+    },
+    {
+      id: 1,
+      nombre: "Aprender Angular",
+      completada: true
+    },
+    {
+      id: 2,
+      nombre: "Desarrollar una app",
+      completada: false
+    }
+  ]);
+
+  ocultar = signal(true);
+
+
 
 }

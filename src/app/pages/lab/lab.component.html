@@ -28,3 +28,43 @@
 <p>{{ bandera() }}</p>
 
 <p>Contador: {{ contador() }}</p>
+
+<p>Color seleccionado: {{ color() }}</p>
+<input type="color" (change)="CambiarColor($event)">
+
+<ul>
+  @for (item of listadoSignal(); track $index) {
+  <li>{{ item }}</li>
+  }
+</ul>
+
+<ul>
+  @for (item of listadoTareas(); track item.id ) {
+  <li>Estado de la tarea: {{ item.nombre }} - {{ item.completada }} </li>
+  }
+</ul>
+<p> Número de tareas: {{ listadoTareas().length }}</p>
+
+<hr />
+
+<h1>Estructuras de control</h1>
+
+<button (click)="CambiarBandera()">Cambiar</button>
+
+@if (bandera() === true) {
+<h4>Administrador</h4>
+}@else {
+<h4>Usuario invitado</h4>
+}
+
+@switch (resultado) {
+@case ("Elias"){
+<h4>Bienvenido!</h4>
+}
+@case ("Comida"){
+<h4>Comida seleccionada</h4>
+}
+@default {
+<h4>Esperando respuesta</h4>
+}
+}
