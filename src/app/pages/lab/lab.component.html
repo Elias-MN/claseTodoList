@@ -11,3 +11,20 @@
 
 <h1>Property binding</h1>
 <input type="button" value="Enviar" [disabled]="desabilitado">
+<img [src]="urlImagen" alt="aleatoria">
+
+<h1>Event binding</h1>
+<button (click)="ClickHandler()">Click me!</button>
+<p>{{ clicks }}</p>
+
+<input type="text" (keyup)="InputHandler($event)">
+<p>{{ resultado }}</p>
+
+<hr />
+
+
+<h1>Signals</h1>
+<button (click)="CambiarBandera()">Cambiar</button>
+<p>{{ bandera() }}</p>
+
+<p>Contador: {{ contador() }}</p>
