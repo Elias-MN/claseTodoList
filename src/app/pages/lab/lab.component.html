@@ -99,3 +99,8 @@
 <p>Rol actual: {{ rol() }}</p>
 
 {{ computedRol() }}
+
+<h1>Tarea 2</h1>
+
+<img [class.mostrar]="perroMostrar()" (mouseenter)="animar()" (mouseleave)="desanimar()" src="../../../assets/dog.png"
+  alt="perro" class="perro">

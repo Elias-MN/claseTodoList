@@ -138,6 +138,18 @@ export class LabComponent {
   // Tarea 2: Incorpora una imágen en uno de los extremos de la pantalla, a continuación, añade un efecto css
   // para que cuando el ratón esté SÓLO encima de ella, se añada una clase específica
 
+  perroMostrar = signal(false);
+  animar() {
+    this.perroMostrar.set(true);
+  }
 
+  desanimar() {
+    this.perroMostrar.set(false);
+  }
+
+
+  // Tarea 3: Crea un nuevo componente "list" al que deberás acceder por el routing mediante /list, este componente deberá
+  // tener un input text para incluir tareas y un listado con las tareas que se van incluyendo, por último, cada tarea del listado
+  // deberá mostrar, su nombre y con un checkbox, si está completada
 
 }
