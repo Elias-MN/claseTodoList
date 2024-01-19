@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { Tarea } from '../../model/tarea.model';
 
 @Component({
@@ -84,6 +84,59 @@ export class LabComponent {
   ]);
 
   ocultar = signal(true);
+  botonEstado = signal("Ocultar");
+
+  cambiarCSS() {
+    this.ocultar.set(!this.ocultar());
+
+    if (this.ocultar()) {
+      this.botonEstado.set("Ocultar");
+    } else {
+      this.botonEstado.set("Mostrar");
+    }
+
+  }
+
+  texto = signal("");
+  cambiarNombre(event: Event) {
+    let input = event.target as HTMLInputElement;
+    this.texto.set(input.value);
+  }
+
+
+  firstName = signal("");
+  lastName = signal("");
+
+  cambiarName(event: Event) {
+    let input = event.target as HTMLInputElement;
+    this.firstName.set(input.value);
+  }
+
+  cambiarApellido(event: Event) {
+    let input = event.target as HTMLInputElement;
+    this.lastName.set(input.value);
+  }
+
+  fullName = computed(() => {
+    return this.firstName() + " " + this.lastName();
+  });
+
+  rol = signal("");
+  cambiar(newRol: string) {
+    this.rol.set(newRol);
+  }
+
+  computedRol = computed(() => {
+    let rolRecibido = this.rol();
+    if (rolRecibido === 'admin') {
+      console.log("Eres admin");
+    } else {
+      console.log("No eres admin");
+    }
+  });
+
+  // Tarea 2: Incorpora una imágen en uno de los extremos de la pantalla, a continuación, añade un efecto css
+  // para que cuando el ratón esté SÓLO encima de ella, se añada una clase específica
 
 
 

@@ -68,3 +68,34 @@
 <h4>Esperando respuesta</h4>
 }
 }
+
+<div>
+  <button (click)="cambiarCSS()">{{ botonEstado() }}</button>
+  <span [class.ocultar]="ocultar()">Hola</span>
+</div>
+
+<input type="text" (keyup)="cambiarNombre($event)">
+<span [className]="texto() === 'Valido' ? 'mostrar' : 'ocultar'">Ejemplo</span>
+
+<hr />
+
+<h1>Computed states</h1>
+
+<h4>Ejemplo 1</h4>
+
+<input type="text" placeholder="nombre" (keyup)="cambiarName($event)">
+<input type="text" placeholder="apellido" (keyup)="cambiarApellido($event)">
+
+<p>Nombre: {{ firstName() }}</p>
+<p>Apellidos: {{ lastName() }}</p>
+
+<p>Nombre completo: {{ fullName() }}</p>
+
+<h4>Ejemplo 2</h4>
+
+<button (click)="cambiar('admin')">Cambiar rol a admin</button>
+<button (click)="cambiar('invitado')">Cambiar rol a invitado</button>
+
+<p>Rol actual: {{ rol() }}</p>
+
+{{ computedRol() }}
