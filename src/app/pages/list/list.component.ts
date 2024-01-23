@@ -34,6 +34,7 @@ export class ListComponent {
     // Con update lo actualizamos, indicamos el valor anterior
     // y usando el operador REST, incluimos la nueva al final de la lista
     this.listTask.update((listTask) => [...listTask, newTask]);
+    input.value = "";
 
     /*
     Los tipos primitivos son inmutables. Una vez que se le asigna un valor primitivo a una variable,
@@ -48,4 +49,24 @@ export class ListComponent {
 
   }
 
+  deleteTask(id: Number) {
+    // Mutar el listado sería usando un método como .splice sobre el array
+    // Pero siguiendo el patrón de crear nuevos estados de las señales de Angular
+    // Utilizamos la función nativa de JS .filter para quedarnos con las tareas que cumplan una condición, que
+    // se basa en comparar el índice del elemento al que hemos pulsado del listado
+
+    this.listTask.update((listTask) => listTask.filter((task, posicion) => posicion !== id));
+
+    /* Lo mismo pero de otra forma:
+    this.listTask.update((listTask) => {
+      return listTask.filter((task, posicion) => {
+        return posicion !== id
+      });
+    });
+    */
+  }
+
+  updateTask(id: Number) {
+
+  }
 }

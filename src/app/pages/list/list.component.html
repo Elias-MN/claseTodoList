@@ -1,12 +1,63 @@
-<input type="text" placeholder="Nueva tarea..." (keydown.enter)="addNewTask($event)" (blur)="addNewTask($event)">
+<section class="todoapp">
+  <header class="header">
+    <div class="container">
+      <h1>Mi lista de tareas</h1>
+      <input (keydown.enter)="addNewTask($event)" class="new-todo" placeholder="Nueva tarea" autofocus type="text" />
+    </div>
+  </header>
+  <div class="container todoapp-wrapper">
 
-<div class="list-container">
-  @for (item of listTask(); track $index) {
-  <div class="task">
-    <h3>
-      {{ item.nombre }}
-    </h3>
-    <input type="checkbox" [checked]="item.completada">
+    <section class="main">
+      <ul class="todo-list">
+        @for (task of listTask(); track task.id; let id = $index) {
+        <li>
+          <div class="view">
+            <input (click)="updateTask(id)" class="toggle" type="checkbox" [checked]="task.completada" />
+            <label>{{ task.nombre }}</label>
+            <button class="destroy" (click)="deleteTask(id)"></button>
+          </div>
+          <input class="edit" value="" />
+        </li>
+        }
+        <!--
+        <li class="completed">
+          <div class="view">
+            <input class="toggle" type="checkbox" checked />
+            <label>Darle un jamón a Elías</label>
+            <button class="destroy"></button>
+          </div>
+          <input class="edit" value="" />
+        </li>
+
+        <li class="editing">
+          <div class="view">
+            <input class="toggle" type="checkbox" />
+            <label>Hacer la compra...</label>
+            <button class="destroy"></button>
+          </div>
+          <input class="edit" value="" />
+        </li>
+-->
+      </ul>
+    </section>
+
+    <footer class="footer">
+
+      <span class="todo-count"><strong>0</strong> tareas</span>
+
+      <ul class="filters">
+        <li>
+          <a routerLink="/" class="selected">Todas</a>
+        </li>
+        <li>
+          <a routerLink="/pending">Pendientes</a>
+        </li>
+        <li>
+          <a routerLink="/completed">Completadas</a>
+        </li>
+      </ul>
+
+      <button class="clear-completed">Limpiar</button>
+    </footer>
   </div>
-  }
-</div>
+</section>
