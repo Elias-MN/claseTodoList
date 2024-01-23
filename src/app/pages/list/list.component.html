@@ -1,0 +1,12 @@
+<input type="text" placeholder="Nueva tarea..." (keydown.enter)="addNewTask($event)" (blur)="addNewTask($event)">
+
+<div class="list-container">
+  @for (item of listTask(); track $index) {
+  <div class="task">
+    <h3>
+      {{ item.nombre }}
+    </h3>
+    <input type="checkbox" [checked]="item.completada">
+  </div>
+  }
+</div>

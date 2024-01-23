@@ -12,3 +12,20 @@
 .mostrar{
   bottom: 0px;
 }
+
+.list-container{
+  background: #cccccc;
+  padding: 20px;
+}
+
+.list-item{
+  border: 1px solid;
+  padding: 5px;
+  display: flex;
+}
+
+.list-item input[type=checkbox]{
+  width: 18px;
+  height: 20px;
+  margin: 0 10px;
+}

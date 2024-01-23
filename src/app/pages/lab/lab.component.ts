@@ -117,6 +117,8 @@ export class LabComponent {
     this.lastName.set(input.value);
   }
 
+  // Para asignarle un valor, debemos devolverselo con return
+  // fullName debe estar en la plantilla
   fullName = computed(() => {
     return this.firstName() + " " + this.lastName();
   });
@@ -127,7 +129,10 @@ export class LabComponent {
   }
 
   computedRol = computed(() => {
+    // Podemos controlar cualquier número de signals
     let rolRecibido = this.rol();
+
+    // Cuando cambie cualquier signal, se ejecutará toda esta función computed
     if (rolRecibido === 'admin') {
       console.log("Eres admin");
     } else {
@@ -152,4 +157,61 @@ export class LabComponent {
   // tener un input text para incluir tareas y un listado con las tareas que se van incluyendo, por último, cada tarea del listado
   // deberá mostrar, su nombre y con un checkbox, si está completada
 
+  newTask(event: Event) {
+    let input = event.target as HTMLInputElement;
+
+    let newTask: Tarea = {
+      id: Date.now(),
+      nombre: input.value,
+      completada: false
+    };
+    let newList = this.tareaListado();
+    newList.push(newTask);
+    this.tareaListado.set(newList);
+
+    input.value = "";
+
+  }
+
+  newTaskUpdate(event: Event) {
+    let input = event.target as HTMLInputElement;
+
+    let newTask: Tarea = {
+      id: Date.now(),
+      nombre: input.value,
+      completada: false
+    };
+
+
+
+
+    // Con set reseteamos todo el valor
+    // Con update lo actualizamos, indicamos el valor anterior
+    // y usando el operador REST, incluimos la nueva al final de la lista
+    this.tareaListado.update((tareaListado) => [...tareaListado, newTask]);
+
+    // Update sigue el patrón no mutar para manejar estados de elementos,
+    // que genera un nuevo estado del listado
+
+    input.value = "";
+
+  }
+
+  tareaListado = signal<Tarea[]>([
+    {
+      id: 0,
+      nombre: "Aprender js",
+      completada: false
+    },
+    {
+      id: 1,
+      nombre: "Aprender Angular",
+      completada: true
+    },
+    {
+      id: 2,
+      nombre: "Desarrollar una app",
+      completada: false
+    }
+  ]);
 }

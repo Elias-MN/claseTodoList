@@ -104,3 +104,20 @@
 
 <img [class.mostrar]="perroMostrar()" (mouseenter)="animar()" (mouseleave)="desanimar()" src="../../../assets/dog.png"
   alt="perro" class="perro">
+
+
+
+<h1>Tarea 3</h1>
+
+<div class="list-container">
+  <input type="text" placeholder="Nueva tarea..." (keydown.enter)="newTask($event)">
+  <div>
+    <h2>Listado de tareas</h2>
+    @for (item of tareaListado(); track $index) {
+    <div class="list-item">
+      <span>{{ item.nombre }}</span>
+      <input type="checkbox" [value]="item.completada">
+    </div>
+    }
+  </div>
+</div>
