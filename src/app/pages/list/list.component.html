@@ -16,7 +16,8 @@
             <label>{{ task.nombre }}</label>
             <button class="destroy" (click)="deleteTask(id)"></button>
           </div>
-          <input class="edit" value="" />
+          <input class="edit" value="" (click)="updateTask(id)" />
+          {{ task.completada }}
         </li>
         }
         <!--

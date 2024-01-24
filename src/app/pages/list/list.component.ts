@@ -67,6 +67,17 @@ export class ListComponent {
   }
 
   updateTask(id: Number) {
+    this.listTask.update((listTask) => {
+      return listTask.map((task, posicion) => {
+        if (id === posicion) {
+          return {
+            ...task,
+            completada: !task.completada
+          }
+        }
+        return task;
+      });
+    });
 
   }
 }
