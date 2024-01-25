@@ -17,7 +17,6 @@
             <button class="destroy" (click)="deleteTask(id)"></button>
           </div>
           <input class="edit" value="" (click)="updateTask(id)" />
-          {{ task.completada }}
         </li>
         }
         <!--
@@ -42,9 +41,16 @@
       </ul>
     </section>
 
+    @if (listTask().length > 0) {
     <footer class="footer">
 
-      <span class="todo-count"><strong>0</strong> tareas</span>
+      <span class="todo-count"><strong>{{ listTask().length }}</strong>
+        @if(listTask().length > 1){
+        tareas
+        }@else{
+        tarea
+        }
+      </span>
 
       <ul class="filters">
         <li>
@@ -60,5 +66,6 @@
 
       <button class="clear-completed">Limpiar</button>
     </footer>
+    }
   </div>
 </section>

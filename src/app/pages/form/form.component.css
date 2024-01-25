@@ -1,0 +1,32 @@
+form{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  height: 100dvh;
+  gap: 5px;
+}
+
+.valida{
+  background-color: green;
+}
+
+.noValida{
+  background-color: red;
+}
+
+.mostrarError{
+  display: block;
+}
+
+.ocultarError{
+  display: none;
+}
+
+.persona{
+  background-image: url(../../../assets/person.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  display: block;
+  width: 75px;
+}

@@ -1,0 +1,37 @@
+<form>
+  <div>
+    <label for="nombre">Nombre</label>
+    <input type="text" name="nombre" id="nombre" [formControl]="nombreControl" (keyup)="comprobarNombre()" required>
+
+    <span [className]="nombreControl.invalid && nombreControl.touched
+    ? 'mostrarError' : 'ocultarError'">Debe tener
+      mínimo 5
+      carácteres</span>
+
+    @if(nombreControl.invalid && nombreControl.touched){
+    <span>Debe tener
+      mínimo 5
+      carácteres</span>
+    }
+
+  </div>
+
+  <div>
+    <label for="password">Contraseña</label>
+    <input type="password" name="password" id="password">
+  </div>
+
+  <div>
+    <label for="altura">Altura</label>
+    <input type="number" name="altura" id="altura" [formControl]="alturaControl">
+    <span [style.height.px]="alturaControl.value" class="persona"></span>
+  </div>
+
+  <div>
+    <p>Color: {{ colorControl.value }}</p>
+    <label for="color">Color</label>
+    <input type="color" name="color" id="color" [formControl]="colorControl">
+  </div>
+
+  <input type="submit" value="Registrar">
+</form>
