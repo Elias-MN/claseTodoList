@@ -1,0 +1,27 @@
+<main>
+
+  <h1>Iniciar sesión</h1>
+
+  <form method="post">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input [formControl]="emailControler" type="email" name="Email" id="email" required>
+    </div>
+    @if(emailControler.invalid && submitHecho()){
+    <span>Debe ser un email válido</span>
+    }
+
+    <div class="form-group">
+      <label for="pass">Contraseña</label>
+      <input [formControl]="passwordControler" type="password" name="Contraseña" id="pass" required>
+    </div>
+    @if(passwordControler.invalid && submitHecho()){
+    <span>La contraseña debe tener al menos 8 carácteres</span>
+    }
+
+
+    <input (click)="Login()" class="button" type="button" value="Iniciar sesión">
+
+  </form>
+
+</main>

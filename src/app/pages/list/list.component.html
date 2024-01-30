@@ -2,7 +2,8 @@
   <header class="header">
     <div class="container">
       <h1>Mi lista de tareas</h1>
-      <input (keydown.enter)="addNewTask($event)" class="new-todo" placeholder="Nueva tarea" autofocus type="text" />
+      <input [formControl]="nuevaTareaControlador" (keydown.enter)="checkTarea()" class="new-todo"
+        placeholder="Nueva tarea" autofocus type="text" />
     </div>
   </header>
   <div class="container todoapp-wrapper">
@@ -10,13 +11,14 @@
     <section class="main">
       <ul class="todo-list">
         @for (task of listTask(); track task.id; let id = $index) {
-        <li>
+        <li (dblclick)="updateModeEditing(id)" [class.editing]="task.editando">
           <div class="view">
             <input (click)="updateTask(id)" class="toggle" type="checkbox" [checked]="task.completada" />
             <label>{{ task.nombre }}</label>
             <button class="destroy" (click)="deleteTask(id)"></button>
           </div>
-          <input class="edit" value="" (click)="updateTask(id)" />
+          <input class="edit" [value]="task.nombre" (click)="updateTask(id)" (blur)="updateTexto(id, $event)"
+            (keydown.enter)="updateTexto(id, $event)" />
         </li>
         }
         <!--

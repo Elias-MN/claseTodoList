@@ -1,10 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { Tarea } from '../../model/tarea.model';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css'
 })
@@ -12,13 +13,65 @@ export class ListComponent {
 
   listTask = signal<Tarea[]>([]);
 
-  addNewTask(event: Event) {
-    let input = event.target as HTMLInputElement;
+  nuevaTareaControlador = new FormControl('', {
+    nonNullable: true,
+    validators: [
+      Validators.minLength(3),
+      Validators.required
+    ]
+  });
 
+  checkTarea() {
+    if (this.nuevaTareaControlador.valid) {
+      let titulo = this.nuevaTareaControlador.value.trim();
+      if (titulo !== "") {
+        this.addNewTask(this.nuevaTareaControlador.value);
+        this.nuevaTareaControlador.reset();
+      }
+    }
+  }
+
+  updateModeEditing(id: number) {
+    this.listTask.update((listTask) => {
+      return listTask.map((task, posicion) => {
+        if (id === posicion) {
+          return {
+            ...task,
+            editando: true
+          }
+        }
+        return {
+          ...task,
+          editando: false
+        }
+      });
+    });
+  }
+
+  updateTexto(id: number, event: Event) {
+    let texto = event.target as HTMLInputElement;
+
+    this.listTask.update((listTask) => {
+      return listTask.map((task, posicion) => {
+        if (id === posicion) {
+          return {
+            ...task,
+            nombre: texto.value,
+            editando: false
+          }
+        }
+        return task
+      });
+    });
+
+  }
+
+  addNewTask(titulo: string) {
     let newTask: Tarea = {
       id: Date.now(),
-      nombre: input.value,
-      completada: false
+      nombre: titulo,
+      completada: false,
+      editando: false
     }
 
     // Opción 1 (No recomendada)
@@ -34,7 +87,6 @@ export class ListComponent {
     // Con update lo actualizamos, indicamos el valor anterior
     // y usando el operador REST, incluimos la nueva al final de la lista
     this.listTask.update((listTask) => [...listTask, newTask]);
-    input.value = "";
 
     /*
     Los tipos primitivos son inmutables. Una vez que se le asigna un valor primitivo a una variable,
