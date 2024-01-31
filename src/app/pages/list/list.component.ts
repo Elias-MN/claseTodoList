@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { Tarea } from '../../model/tarea.model';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -130,6 +130,33 @@ export class ListComponent {
         return task;
       });
     });
-
   }
+
+  filtro = signal<'todas' | 'pendientes' | 'completadas'>('todas');
+
+  CambiarFiltro(nuevoFiltro: 'todas' | 'pendientes' | 'completadas') {
+    this.filtro.set(nuevoFiltro);
+  }
+
+  listadoPorFiltro = computed(() => {
+    // Cada vez que cambie el filtro o se añada una tarea
+    let filtro = this.filtro();
+    let listado = this.listTask();
+
+    // Obtengo las tareas no completadas
+    if (filtro === "completadas") {
+      return listado.filter(tarea => tarea.completada === false);
+    }
+
+    // Obtengo las tareas completadas
+    if (filtro === "pendientes") {
+      return listado.filter(tarea => tarea.completada === true);
+    }
+
+    // Obtengo todas las tareas
+    return listado;
+
+  });
+
+
 }
