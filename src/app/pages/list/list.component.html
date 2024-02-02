@@ -10,15 +10,15 @@
 
     <section class="main">
       <ul class="todo-list">
-        @for (task of listadoPorFiltro(); track task.id; let id = $index) {
-        <li (dblclick)="updateModeEditing(id)" [class.editing]="task.editando" [class.completed]="task.completada">
+        @for (task of listadoPorFiltro(); track task.id) {
+        <li (dblclick)="updateModeEditing(task.id)" [class.editing]="task.editando" [class.completed]="task.completada">
           <div class="view">
-            <input (click)="updateTask(id)" class="toggle" type="checkbox" [checked]="task.completada" />
+            <input (click)="updateTask(task.id)" class="toggle" type="checkbox" [checked]="task.completada" />
             <label>{{ task.nombre }}</label>
-            <button class="destroy" (click)="deleteTask(id)"></button>
+            <button class="destroy" (click)="deleteTask(task.id)"></button>
           </div>
-          <input class="edit" [value]="task.nombre" (click)="updateTask(id)" (blur)="updateTexto(id, $event)"
-            (keydown.enter)="updateTexto(id, $event)" />
+          <input class="edit" [value]="task.nombre" (blur)="updateTexto(task.id, $event)"
+            (keydown.enter)="updateTexto(task.id, $event)" />
         </li>
         }
       </ul>
@@ -27,8 +27,8 @@
     @if (listTask().length > 0) {
     <footer class="footer">
 
-      <span class="todo-count"><strong>{{ listTask().length }}</strong>
-        @if(listTask().length > 1){
+      <span class="todo-count"><strong>{{ listadoPorFiltro().length }}</strong>
+        @if(listadoPorFiltro().length > 1){
         tareas
         }@else{
         tarea
@@ -47,7 +47,7 @@
         </li>
       </ul>
 
-      <button class="clear-completed">Limpiar</button>
+      <button (click)="limpiarCompletadas()" class="clear-completed">Limpiar</button>
     </footer>
     }
   </div>
